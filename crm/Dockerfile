@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY . /var/www/html/crm
+COPY . /var/www/html/arbitrage-shark/crm
 
-WORKDIR /var/www/html/crm
+WORKDIR /var/www/html/arbitrage-shark/crm
 
 RUN composer install
 
