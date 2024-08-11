@@ -16,7 +16,6 @@ services:
     container_name: nginx
     ports:
       - "8080:80"
-      - "80:80"
     volumes:
       - .:/var/www/html/arbitrage-shark/
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
