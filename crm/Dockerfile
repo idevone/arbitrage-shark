@@ -22,7 +22,7 @@ WORKDIR /var/www/html/crm
 
 RUN composer install
 
-RUN chown -R www-data:www-data /var/www/html/arbitrage-shark/crm/runtime /var/www/html/arbitrage-shark/crm/web/assets
+RUN chown -R www-data:www-data /var/www/html/arbitrage-shark/crm/web/runtime /var/www/html/arbitrage-shark/crm/web/assets
 
 EXPOSE 9000
 
