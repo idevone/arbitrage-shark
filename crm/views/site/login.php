@@ -8,7 +8,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Вход в систему';
+$this->title = 'Вход в систему Arbitrage Shark';
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
