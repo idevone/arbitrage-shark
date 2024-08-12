@@ -173,6 +173,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 $items = [];
                 if (Yii::$app->user->identity->role == 'TeamleadMediabuyer' || Yii::$app->user->identity->role == 'Admin') {
                     $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Вся статистика',
+                        'url' => ['/statistic/mediabuyers-all'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/statistic/mediabuyers-all' ? ' active' : '')],
+                    ];
+                    $items[] = [
                         'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Статистика',
                         'url' => ['/statistic/mediabuyers'],
                         'encode' => false,
