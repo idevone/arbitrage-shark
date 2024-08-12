@@ -17,7 +17,6 @@ $this->title = 'Медиа статистика';
         ?>
         <h1>Административная статистика</h1>
         <?php
-        echo MediabuyersGridView::widget();
     } else {
     ?>
     <h1>Ваша статистика</h1>
@@ -29,43 +28,47 @@ $this->title = 'Медиа статистика';
     </p>
 
 
-    <!--    --><?php //= Tabs::widget([
-    //        'items' => [
-    //            [
-    //                'label' => 'За последние 24 часа',
-    //                'content' => $this->render('_last24h'),
-    //                'active' => true,
-    //            ],
-    //            [
-    //                'label' => 'За последние 7 дней',
-    //                'content' => $this->render('_last7d'),
-    //            ],
-    //            [
-    //                'label' => 'За последние 30 дней',
-    //                'content' => $this->render('_last30d'),
-    //            ],
-    //            [
-    //                'label' => 'За последние 90 дней',
-    //                'content' => $this->render('_last90d'),
-    //            ],
-    //            [
-    //                'label' => 'За последние 180 дней',
-    //                'content' => $this->render('_last180d'),
-    //            ],
-    //            [
-    //                'label' => 'За последний год',
-    //                'content' => $this->render('_lastYear'),
-    //            ],
-    //            [
-    //                'label' => 'За все время',
-    //                'content' => $this->render('_allTime'),
-    //            ],
-    //            [
-    //                'label' => 'Выбрать период',
-    //                'content' => $this->render('_allTime'),
-    //            ],
-    //        ],
-    //    ]) ?>
+    <?= Tabs::widget([
+        'items' => [
+            [
+                'label' => 'По каналам',
+                'content' => $this->render('_byChannel'),
+                'active' => true,
+            ],
+            [
+                'label' => 'По адсетам',
+                'content' => $this->render('_byAdset'),
+            ],
+            [
+                'label' => 'По объявлениям',
+                'content' => $this->render('_byAdName'),
+            ],
+            [
+                'label' => 'По местам размещения',
+                'content' => $this->render('_byPlacement'),
+            ],
+            [
+                'label' => 'По ID объявления',
+                'content' => $this->render('_byAdId'),
+            ],
+            [
+                'label' => 'По ID кампании',
+                'content' => $this->render('_byCampaignId'),
+            ],
+            [
+                'label' => 'По источникам',
+                'content' => $this->render('_bySourceName'),
+            ],
+            [
+                'label' => 'По датам',
+                'content' => $this->render('_byDate'),
+            ],
+            [
+                'label' => 'Вся статистика',
+                'content' => $this->render('_all'),
+            ],
+        ],
+    ]) ?>
 
     <?php
     Modal::begin([

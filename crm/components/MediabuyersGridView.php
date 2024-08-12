@@ -13,9 +13,6 @@ class MediabuyersGridView extends Widget
 {
     public function run()
     {
-//        if (Yii::user()->identity->role == 'Admin' && Yii::User()->identity->role == 'TeamLeadMediabuyer') {
-//
-//        }
 
         $query = TrafficData::find()
             ->select([
@@ -25,10 +22,6 @@ class MediabuyersGridView extends Widget
                 'campaign_name',
                 'ad_name',
                 'placement',
-//                'SUM(clicks) as total_clicks',
-//                'SUM(subscribers) as total_subscribers',
-//                'SUM(dialogs) as total_dialogs',
-//                'SUM(deposits) as total_deposits',
             ])
             ->groupBy([
                 'created_at',
