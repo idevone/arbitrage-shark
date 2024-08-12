@@ -3,6 +3,7 @@
 namespace app\components;
 
 use app\models\TrafficData;
+use Yii;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
