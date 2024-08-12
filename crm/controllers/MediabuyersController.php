@@ -12,4 +12,9 @@ class MediabuyersController extends Controller
         return $this->render('index');
     }
 
+    public function actionBuyers()
+    {
+        return $this->render('buyers');
+    }
+
 }

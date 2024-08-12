@@ -23,9 +23,9 @@ $this->title = 'Медиа статистика';
     <?php
     }
     ?>
-    <p class="mt-5">
-        <?= Html::button('Подать новый отчет', ['value' => Url::to(['financial/create']), 'class' => 'btn btn-primary', 'id' => 'modalButton']) ?>
-    </p>
+<!--    <p class="mt-5">-->
+<!--        --><?php //= Html::button('Подать новый отчет', ['value' => Url::to(['financial/create']), 'class' => 'btn btn-primary', 'id' => 'modalButton']) ?>
+<!--    </p>-->
 
 
     <?= Tabs::widget([
