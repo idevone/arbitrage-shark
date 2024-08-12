@@ -13,29 +13,31 @@ class MediabuyersGridView extends Widget
 {
     public function run()
     {
-        if (Yii::user()->identity->role == 'Admin' && Yii::user()->identity->role == 'TeamLeadMediabuyer') {
-            $query = TrafficData::find()
-                ->select([
-                    'created_at',
-                    'pixel_id',
-                    'adset_name',
-                    'campaign_name',
-                    'ad_name',
-                    'placement',
+//        if (Yii::user()->identity->role == 'Admin' && Yii::User()->identity->role == 'TeamLeadMediabuyer') {
+//
+//        }
+
+        $query = TrafficData::find()
+            ->select([
+                'created_at',
+                'pixel_id',
+                'adset_name',
+                'campaign_name',
+                'ad_name',
+                'placement',
 //                'SUM(clicks) as total_clicks',
 //                'SUM(subscribers) as total_subscribers',
 //                'SUM(dialogs) as total_dialogs',
 //                'SUM(deposits) as total_deposits',
-                ])
-                ->groupBy([
-                    'created_at',
-                    'pixel_id',
-                    'adset_name',
-                    'campaign_name',
-                    'ad_name',
-                    'placement',
-                ]);
-        }
+            ])
+            ->groupBy([
+                'created_at',
+                'pixel_id',
+                'adset_name',
+                'campaign_name',
+                'ad_name',
+                'placement',
+            ]);
 
 
         $dataProvider = new ActiveDataProvider([
