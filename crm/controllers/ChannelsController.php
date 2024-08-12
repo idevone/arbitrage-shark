@@ -34,6 +34,7 @@ class ChannelsController extends Controller
 
     public function actionCreate()
     {
+        $utm = 'pixel=<?php echo $_GET["pixel"] ?>&campaign_id=<?php echo $_GET["campaign_id"] ?>&adset_id=<?php echo $_GET["adset_id"] ?>&ad_id=<?php echo $_GET["ad_id"] ?>&campaign_name=<?php echo $_GET["campaign_name"] ?>&adset_name=<?php echo $_GET["adset_name"] ?>&ad_name=<?php echo $_GET["ad_name"] ?>&placement=<?php echo $_GET["placement"] ?>&site_source_name=<?php echo $_GET["site_source_name"] ?>&fbclid=<?php echo $_GET["fbclid"] ?>';
         $model = new ChannelForm();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -42,11 +43,12 @@ class ChannelsController extends Controller
             $model->channel_bot = Yii::$app->request->post('ChannelForm')['channel_bot'];
             $model->responsible = Yii::$app->user->id;
             $model->invite_link = Yii::$app->request->post('ChannelForm')['invite_link'];
-//            $model->fb_pixel = implode(',', Yii::$app->request->post('ChannelForm')['selectedPixels']);
             if ($model->fb_pixel === null) {
                 $model->fb_pixel = '';
             }
             $model->telegram_account = Yii::$app->request->post('ChannelForm')['telegram_account'];
+            $model->hashId = Yii::$app->security->generateRandomString(5);
+            $model->btn_link = 'http://localhost:8080/redirect/' . $model->hashId . '?' . $utm;  // TODO: change to real domain
             $model->created_at = date('Y-m-d H:i:s');
             $model->updated_at = date('Y-m-d H:i:s');
 

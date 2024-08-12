@@ -49,14 +49,9 @@ $config = [
             'rules' => [
                 'login' => 'site/login',
                 'logout' => 'site/logout',
-
-//                'users' => 'site/users/',
-//                'users/processor' => 'site/users/processor',
-//                'users/processor' => 'site/processor',
-//                'users/processor' => 'site/processor',
-
                 'channel' => 'site/channel',
                 'channel/<id:\d+>' => 'site/channel/view',
+                'redirect/<id:\d+>' => 'redirect/index',
 
             ],
         ],

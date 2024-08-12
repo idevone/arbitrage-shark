@@ -17,6 +17,9 @@ use yii\db\ActiveRecord;
  * @property string $telegram_account
  * @property string $created_at
  * @property string $updated_at
+ * @property array $selectedPixels
+ * @property string $hashId
+ * @property string $btn_link
  */
 
 class ChannelForm extends ActiveRecord
