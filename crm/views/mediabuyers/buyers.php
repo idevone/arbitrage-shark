@@ -44,6 +44,18 @@ $this->title = 'Медиа статистика';
                 'content' => $this->render('_byPlacement1'),
             ],
             [
+                'label' => 'По ID объявления',
+                'content' => $this->render('_byAdId1'),
+            ],
+            [
+                'label' => 'По ID кампании',
+                'content' => $this->render('_byCampaignId1'),
+            ],
+            [
+                'label' => 'По источникам',
+                'content' => $this->render('_bySourceName1'),
+            ],
+            [
                 'label' => 'По датам',
                 'content' => $this->render('_byDate1'),
             ]
