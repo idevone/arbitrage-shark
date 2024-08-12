@@ -7,19 +7,18 @@ use yii\grid\GridView;
 
 $query = TrafficData::find()
     ->select([
-        'pixel_id',
+        'channel',
         'COUNT(DISTINCT fbclid) AS unique_fbclid_count',
         'COUNT(DISTINCT user_id) AS unique_user_id_count',
-        'COUNT(fbclid) AS fbclid_count',
     ])
-    ->groupBy('pixel_id')
+    ->groupBy('channel')
     ->asArray()
     ->all();
 
 $dataProvider = new ArrayDataProvider([
     'allModels' => $query, // Используем результаты запроса с ActiveRecord
     'pagination' => [
-        'pageSize' => 20,
+        'pageSize' => 99999,
     ],
 ]);
 
@@ -27,9 +26,14 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'summary' => 'Итог: {totalCount} записей',
     'columns' => [
-        ['attribute' => 'pixel_id', 'label' => 'Pixel ID'],
-        ['attribute' => 'unique_fbclid_count', 'label' => 'Unique FBCLIDs'],
+        ['attribute' => 'channel', 'label' => 'Канал'],
+        ['attribute' => 'unique_fbclid_count', 'label' => 'Кликов'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Подписчиков'],
-        ['attribute' => 'fbclid_count', 'label' => 'Всего FBCLIDs'],
+        ['label' => 'Диалогов', 'value' => function ($data) {
+            return 0;
+        }],
+        ['label' => 'Депозитов', 'value' => function ($data) {
+            return 0;
+        }],
     ],
 ]);

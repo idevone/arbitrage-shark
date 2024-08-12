@@ -36,7 +36,7 @@ class MediabuyersGridView extends Widget
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 20, // Вы можете указать нужное количество записей на странице
+                'pageSize' => 999999, // Вы можете указать нужное количество записей на странице
             ],
         ]);
 
@@ -47,11 +47,14 @@ class MediabuyersGridView extends Widget
             'dataProvider' => $dataProvider,
             'summary' => 'Итог: {totalCount} записей',
             'columns' => [
-                ['attribute' => 'created_at', 'label' => 'Дата'],
-                ['attribute' => 'pixel_id', 'label' => 'Канал'],
-                ['attribute' => 'adset_name', 'label' => 'Название адсета'],
-                ['attribute' => 'campaign_name', 'label' => 'Название кампании'],
-                ['attribute' => 'ad_name', 'label' => 'Название объявления'],
+//                ['attribute' => 'created_at', 'label' => 'Дата'],
+//                ['attribute' => 'pixel_id', 'label' => 'Канал'],
+//                ['attribute' => 'adset_name', 'label' => 'Название адсета'],
+//                ['attribute' => 'campaign_name', 'label' => 'Название кампании'],
+//                ['attribute' => 'ad_name', 'label' => 'Название объявления'],
+                ['label' => 'Группировка', 'value' => function ($model) {
+                    return "";
+                }],
                 ['attribute' => 'placement', 'label' => 'Место размещения'],
                 ['attribute' => 'total_clicks', 'label' => 'Кол-во кликов'],
                 ['attribute' => 'total_subscribers', 'label' => 'Кол-во подписчиков'],

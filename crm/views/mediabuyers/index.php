@@ -31,42 +31,46 @@ $this->title = 'Медиа статистика';
     <?= Tabs::widget([
         'items' => [
             [
-                'label' => 'По каналам',
-                'content' => $this->render('_byChannel'),
+                'label' => 'По пикселям',
+                'content' => $this->render('_byPixel'),
                 'active' => true,
             ],
             [
-                'label' => 'По адсетам',
-                'content' => $this->render('_byAdset'),
+                'label' => 'По каналам',
+                'content' => $this->render('_byChannel'),
             ],
-            [
-                'label' => 'По объявлениям',
-                'content' => $this->render('_byAdName'),
-            ],
-            [
-                'label' => 'По местам размещения',
-                'content' => $this->render('_byPlacement'),
-            ],
-            [
-                'label' => 'По ID объявления',
-                'content' => $this->render('_byAdId'),
-            ],
-            [
-                'label' => 'По ID кампании',
-                'content' => $this->render('_byCampaignId'),
-            ],
-            [
-                'label' => 'По источникам',
-                'content' => $this->render('_bySourceName'),
-            ],
+//            [
+//                'label' => 'По адсетам',
+//                'content' => $this->render('_byAdset'),
+//            ],
+//            [
+//                'label' => 'По объявлениям',
+//                'content' => $this->render('_byAdName'),
+//            ],
+//            [
+//                'label' => 'По местам размещения',
+//                'content' => $this->render('_byPlacement'),
+//            ],
+//            [
+//                'label' => 'По ID объявления',
+//                'content' => $this->render('_byAdId'),
+//            ],
+//            [
+//                'label' => 'По ID кампании',
+//                'content' => $this->render('_byCampaignId'),
+//            ],
+//            [
+//                'label' => 'По источникам',
+//                'content' => $this->render('_bySourceName'),
+//            ],
             [
                 'label' => 'По датам',
                 'content' => $this->render('_byDate'),
             ],
-            [
-                'label' => 'Вся статистика',
-                'content' => $this->render('_all'),
-            ],
+//            [
+//                'label' => 'Вся статистика',
+//                'content' => $this->render('_all'),
+//            ],
         ],
     ]) ?>
 
