@@ -51,9 +51,9 @@ echo GridView::widget([
             } elseif ($data['pixel_id'] == '453198644365580') {
                 return 'Jessica';
             } elseif ($data['pixel_id'] == '509725885041613') {
-                return 'Jessica';
+                return 'Mariana';
             } else {
-                return "Jessica";
+                return "Diana";
             }
         }],
         ['attribute' => 'unique_fbclid_count', 'label' => 'Кликов'],
