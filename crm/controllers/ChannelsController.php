@@ -59,7 +59,7 @@ class ChannelsController extends Controller
             }
 
             $model->hashId = $randomString;
-            $model->btn_link = 'http://localhost:8080/redirect/' . $model->hashId . '?' . $utm;  // TODO: change to real domain
+            $model->btn_link = 'https://tgprojectredirect.top/redirect/' . $model->hashId . '?' . $utm;
             $model->created_at = date('Y-m-d H:i:s');
             $model->updated_at = date('Y-m-d H:i:s');
 
