@@ -1,5 +1,7 @@
 <?php
 
+namespace app\mail\layouts;
+
 use yii\db\Migration;
 
 /**

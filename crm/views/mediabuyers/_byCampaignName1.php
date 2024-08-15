@@ -10,7 +10,6 @@ $query = TrafficData::find()
         'campaign_name',
         'COUNT(DISTINCT fbclid) AS unique_fbclid_count',
         'COUNT(DISTINCT user_id) AS unique_user_id_count',
-        'COUNT(fbclid) AS fbclid_count',
     ])
     ->groupBy('campaign_name')
     ->asArray()
@@ -28,8 +27,17 @@ echo GridView::widget([
     'summary' => 'Итог: {totalCount} записей',
     'columns' => [
         ['attribute' => 'campaign_name', 'label' => 'Имя кампании'],
-        ['attribute' => 'unique_fbclid_count', 'label' => 'Unique FBCLIDs'],
+        ['attribute' => 'unique_fbclid_count', 'label' => 'Клики'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Подписчиков'],
-        ['attribute' => 'fbclid_count', 'label' => 'Всего FBCLIDs'],
+        ['attribute' => 'unique_user_id_count', 'label' => 'Диалогов', 'value' => function() {
+            return \app\models\TrafficData::find()
+                ->where(['status' => 'Contact'])
+                ->count();
+        }],
+        ['attribute' => 'unique_user_id_count', 'label' => 'Депозитов', 'value' => function() {
+            return \app\models\TrafficData::find()
+                ->where(['status' => 'Purchase'])
+                ->count();
+        }],
     ],
 ]);

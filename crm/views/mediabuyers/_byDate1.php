@@ -28,13 +28,17 @@ echo GridView::widget([
     'summary' => 'Итог: {totalCount} записей',
     'columns' => [
         ['attribute' => 'created_at', 'label' => 'Дата', 'format' => ['date', 'php:d.m.Y H:i:s']],
-        ['attribute' => 'unique_fbclid_count', 'label' => 'Кликов'],
+        ['attribute' => 'unique_fbclid_count', 'label' => 'Клики'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Подписчиков'],
-        ['label' => 'Диалогов', 'value' => function ($data) {
-            return 0;
+        ['attribute' => 'unique_user_id_count', 'label' => 'Диалогов', 'value' => function() {
+            return \app\models\TrafficData::find()
+                ->where(['status' => 'Contact'])
+                ->count();
         }],
-        ['label' => 'Депозитов', 'value' => function ($data) {
-            return 0;
+        ['attribute' => 'unique_user_id_count', 'label' => 'Депозитов', 'value' => function() {
+            return \app\models\TrafficData::find()
+                ->where(['status' => 'Purchase'])
+                ->count();
         }],
     ],
 ]);

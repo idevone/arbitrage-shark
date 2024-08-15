@@ -25,6 +25,16 @@ services:
     networks:
       - yii2_network
 
+  messenger:
+    build:
+      context: ./messenger
+      dockerfile: Dockerfile
+    container_name: messenger
+    #    ports:
+    #      - 3000:3000
+    networks:
+      - yii2_network
+
   redirect-service:
     build:
       context: redirect-service
@@ -35,20 +45,20 @@ services:
     networks:
       - yii2_network
 
-  pgsql:
-    image: postgres:16
-    container_name: pgsql
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: defaultdb
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - yii2_network
-    restart: always
+#  pgsql:
+#    image: postgres:16
+#    container_name: pgsql
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: defaultdb
+#    volumes:
+#      - ./pg_data:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - yii2_network
+#    restart: always
 
 networks:
   yii2_network:

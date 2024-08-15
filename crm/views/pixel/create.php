@@ -26,6 +26,8 @@ $this->title = 'Создание нового pixel';
 
         <?= $form->field($model, 'pixel_api')->textInput()->label('Pixel API') ?>
 
+        <?= $form->field($model, 'pixel_title')->textInput()->label('Название Pixel\'a') ?>
+
         <div class="form-group">
             <div>
                 <?= Html::submitButton('Добавить пиксель', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

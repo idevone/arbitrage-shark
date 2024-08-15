@@ -11,9 +11,11 @@ class RedirectController extends Controller
 {
     public function actionIndex($id)
     {
-        $bot_token = \app\models\ChannelForm::find()->select('channel_bot')->where(['hashId' => $id])->scalar();
-        $channel_id = \app\models\ChannelForm::find()->select('channel_id')->where(['hashId' => $id])->scalar();
-        $hashId = \app\models\ChannelForm::find()->select('hashId')->where(['hashId' => $id])->scalar();
+
+
+        $bot_token = (string) \app\models\ChannelForm::find()->select('channel_bot')->where(['hashId' => $id])->scalar();
+        $channel_id = (int) \app\models\ChannelForm::find()->select('channel_id')->where(['hashId' => $id])->scalar();
+        $hashId = $id;
 
         $apiUrl = "https://api.telegram.org/bot$bot_token/createChatInviteLink";
         $postData = [
@@ -29,6 +31,10 @@ class RedirectController extends Controller
         curl_close($ch);
 
         $responseData = json_decode($response, true);
+
+
+        Yii::debug("Telegram API response: " . json_encode($responseData), __METHOD__);
+        Yii::error("Telegram API response: " . json_encode($responseData), __METHOD__);
 
         if (isset($responseData['ok']) && $responseData['ok']) {
             $invite_link = $responseData['result']['invite_link'];
@@ -55,7 +61,7 @@ class RedirectController extends Controller
                 'placement' => $placement,
                 'site_source_name' => $site_source_name,
                 'fbclid' => $fbclid,
-                'invite_link' => $invite_code,
+                'invite_code' => $invite_code,
                 'created_at' => date('Y-m-d H:i:s'),
             ])->execute();
 
@@ -65,7 +71,10 @@ class RedirectController extends Controller
                 return $this->redirect('https://google.com');
             }
         } else {
-            return $this->redirect('https://google.com');
+            Yii::error("Telegram API error: " . json_encode($responseData), __METHOD__);
+//            return $this->redirect('https://google.com');
+            return $this->render('index', ['id' => $id]);
         }
+        return $this->render('index', ['id' => $id]);
     }
 }

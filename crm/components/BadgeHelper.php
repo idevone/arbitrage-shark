@@ -29,13 +29,13 @@ class BadgeHelper
     public static function getStatusBadge($status)
     {
         switch ($status) {
-            case 'active':
+            case 'Active':
                 return '<span class="badge bg-success-subtle text-success-emphasis rounded-pill">Аккаунт активирован</span>';
-            case 'blocked':
+            case 'Blocked':
                 return '<span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Аккаунт заблокирован</span>';
-            case 'inactive':
+            case 'Inactive':
                 return '<span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Аккаунт неактивен</span>';
-            case 'deleted':
+            case 'Deleted':
                 return '<span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Аккаунт удален</span>';
             default:
                 return Html::encode($status);

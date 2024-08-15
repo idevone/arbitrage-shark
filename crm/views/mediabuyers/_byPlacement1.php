@@ -28,8 +28,17 @@ echo GridView::widget([
     'summary' => 'Итог: {totalCount} записей',
     'columns' => [
         ['attribute' => 'placement', 'label' => 'Место размещения'],
-        ['attribute' => 'unique_fbclid_count', 'label' => 'Unique FBCLIDs'],
+        ['attribute' => 'unique_fbclid_count', 'label' => 'Клики'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Подписчиков'],
-        ['attribute' => 'fbclid_count', 'label' => 'Всего FBCLIDs'],
+        ['attribute' => 'unique_user_id_count', 'label' => 'Диалогов', 'value' => function() {
+            return \app\models\TrafficData::find()
+                ->where(['status' => 'Contact'])
+                ->count();
+        }],
+        ['attribute' => 'unique_user_id_count', 'label' => 'Депозитов', 'value' => function() {
+            return \app\models\TrafficData::find()
+                ->where(['status' => 'Purchase'])
+                ->count();
+        }],
     ],
 ]);

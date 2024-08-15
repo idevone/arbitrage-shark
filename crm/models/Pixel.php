@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $owner
  * @property string $channel
+ * @property string $pixel_title
  * @property string $pixel_id
  * @property string $pixel_api
  * @property string $created_at

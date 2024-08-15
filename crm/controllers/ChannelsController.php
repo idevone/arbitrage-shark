@@ -34,6 +34,8 @@ class ChannelsController extends Controller
 
     public function actionCreate()
     {
+
+
         $utm = 'pixel=<?php echo $_GET["pixel"] ?>&campaign_id=<?php echo $_GET["campaign_id"] ?>&adset_id=<?php echo $_GET["adset_id"] ?>&ad_id=<?php echo $_GET["ad_id"] ?>&campaign_name=<?php echo $_GET["campaign_name"] ?>&adset_name=<?php echo $_GET["adset_name"] ?>&ad_name=<?php echo $_GET["ad_name"] ?>&placement=<?php echo $_GET["placement"] ?>&site_source_name=<?php echo $_GET["site_source_name"] ?>&fbclid=<?php echo $_GET["fbclid"] ?>';
         $model = new ChannelForm();
 
@@ -47,7 +49,16 @@ class ChannelsController extends Controller
                 $model->fb_pixel = '';
             }
             $model->telegram_account = Yii::$app->request->post('ChannelForm')['telegram_account'];
-            $model->hashId = Yii::$app->security->generateRandomString(5);
+
+            $length = 5;
+            $numbers = '0123456789';
+            $randomString = '';
+
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $numbers[random_int(0, strlen($numbers) - 1)];
+            }
+
+            $model->hashId = $randomString;
             $model->btn_link = 'http://localhost:8080/redirect/' . $model->hashId . '?' . $utm;  // TODO: change to real domain
             $model->created_at = date('Y-m-d H:i:s');
             $model->updated_at = date('Y-m-d H:i:s');

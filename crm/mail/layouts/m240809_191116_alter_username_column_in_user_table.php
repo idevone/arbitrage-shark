@@ -1,5 +1,7 @@
 <?php
 
+namespace app\mail\layouts;
+
 use yii\db\Migration;
 
 class m240809_191116_alter_username_column_in_user_table extends Migration

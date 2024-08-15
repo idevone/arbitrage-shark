@@ -36,24 +36,20 @@ $this->title = 'Медиа статистика';
                 'active' => true,
             ],
             [
+                'label' => 'По  кампаниям',
+                'content' => $this->render('_byCampaignName1'),
+            ],
+            [
                 'label' => 'По адсетам',
                 'content' => $this->render('_byAdset1'),
             ],
             [
-                'label' => 'По местам размещения',
-                'content' => $this->render('_byPlacement1'),
-            ],
-            [
-                'label' => 'По ID объявления',
+                'label' => 'По объявлениям',
                 'content' => $this->render('_byAdId1'),
             ],
             [
-                'label' => 'По ID кампании',
-                'content' => $this->render('_byCampaignId1'),
-            ],
-            [
-                'label' => 'По источникам',
-                'content' => $this->render('_bySourceName1'),
+                'label' => 'По местам размещения',
+                'content' => $this->render('_byPlacement1'),
             ],
             [
                 'label' => 'По датам',

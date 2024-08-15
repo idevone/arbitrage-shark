@@ -49,4 +49,15 @@ $this->title = 'Telegram каналы';
     JS;
     $this->registerJs($script);
     ?>
+    <script>
+        function copyLink(link) {
+            const tempInput = document.createElement('input');
+            tempInput.value = link;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            // alert('Ссылка скопирована: ' + link);
+        }
+    </script>
 </div>

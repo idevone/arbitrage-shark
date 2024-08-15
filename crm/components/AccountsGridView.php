@@ -53,8 +53,12 @@ class AccountsGridView extends Widget
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 [
-                    'attribute' => 'user_id',
-                    'label' => 'ID пользователя',
+                    'attribute' => 'telegram_id',
+                    'label' => 'ID',
+                ],
+                [
+                    'attribute' => 'first_name',
+                    'label' => 'Имя пользователя',
                 ],
                 [
                     'label' => 'Имя пользователя',
@@ -76,20 +80,20 @@ class AccountsGridView extends Widget
                     'value' => function ($model) {
                         if (!empty($model->created_at)) {
                             $timestamp = strtotime($model->created_at);
-                            return date('D-y-m H:i:s', $timestamp);
+                            return date('D-m-y', $timestamp);
                         } else {
                             return 'Дата не указана';
                         }
                     }
                 ],
-                [
-                    'attribute' => 'Деактивировать',
-                    'format' => 'html',
-                    'value' => function ($model) {
-                        return Html::a('Деактивировать', ['users/deactivate', 'id' => $model->id], ['class' => 'btn btn-danger']);
-                    },
-                    'headerOptions' => ['class' => 'status-header cursor-pointer mw-100 text-primary'],
-                ],
+//                 [
+//                     'attribute' => 'Деактивировать',
+//                     'format' => 'html',
+//                     'value' => function ($model) {
+//                         return Html::a('Деактивировать', ['users/deactivate', 'id' => $model->id], ['class' => 'btn btn-danger']);
+//                     },
+//                     'headerOptions' => ['class' => 'status-header cursor-pointer mw-100 text-primary'],
+//                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{view} {update} {delete}',
@@ -111,7 +115,6 @@ class AccountsGridView extends Widget
             ],
             'tableOptions' => [
                 'class' => 'table table-striped table-hover',
-
             ],
 
         ]);

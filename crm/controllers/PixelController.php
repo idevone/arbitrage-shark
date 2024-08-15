@@ -37,6 +37,7 @@ class PixelController extends Controller
             $model->pixel_id = Yii::$app->request->post('Pixel')['pixel_id'];
             $model->pixel_api = Yii::$app->request->post('Pixel')['pixel_api'];
             $model->channel = 'Не назначен';
+            $model->pixel_title = Yii::$app->request->post('Pixel')['pixel_title'];
             $model->created_at = date('Y-m-d H:i:s');
             $model->updated_at = date('Y-m-d H:i:s');
 

@@ -37,8 +37,8 @@ class PixelsGridView extends Widget
                     'label' => 'Владелец',
                 ],
                 [
-                    'attribute' => 'channel',
-                    'label' => 'Канал',
+                    'attribute' => 'pixel_title',
+                    'label' => 'Название пикселя',
                 ],
                 [
                     'attribute' => 'pixel_id',
