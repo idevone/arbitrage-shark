@@ -6,7 +6,7 @@ use yii\grid\GridView;
 $query = TrafficData::find()
     ->select([
         'pixel_id',
-        'COUNT(DISTINCT fbclid) AS unique_fbclid_count',
+//        'COUNT(fbclid) AS unique_fbclid_count',
         'COUNT(DISTINCT user_id) AS unique_user_id_count',
     ])
     ->where(['not', ['user_id' => null]])
@@ -34,7 +34,12 @@ echo GridView::widget([
             }
             return $data['pixel_id'];
         }],
-        ['attribute' => 'unique_fbclid_count', 'label' => 'Клики'],
+        ['attribute' => 'unique_fbclid_count', 'label' => 'Клики', 'value' => function($data) {
+            return \app\models\TrafficData::find()
+                ->where(['pixel_id' => $data['pixel_id']])
+                ->andWhere(['not', ['fbclid' => null]])
+                ->count();
+        }],
         ['attribute' => 'unique_user_id_count', 'label' => 'Подписчиков'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Диалогов', 'value' => function() {
             return \app\models\TrafficData::find()

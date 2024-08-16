@@ -28,7 +28,12 @@ echo GridView::widget([
     'summary' => 'Итог: {totalCount} записей',
     'columns' => [
         ['attribute' => 'adset_name', 'label' => 'Имя адсета'],
-        ['attribute' => 'unique_fbclid_count', 'label' => 'Клики'],
+        ['attribute' => 'unique_fbclid_count', 'label' => 'Клики', 'value' => function($model) {
+            return \app\models\TrafficData::find()
+                ->where(['adset_name' => $model['adset_name']])
+                ->distinct('fbclid')
+                ->count();
+        }],
         ['attribute' => 'unique_user_id_count', 'label' => 'Подписчиков'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Диалогов', 'value' => function() {
             return \app\models\TrafficData::find()

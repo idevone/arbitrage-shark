@@ -66,6 +66,65 @@ class RedirectController extends Controller
             ])->execute();
 
             if ($id === $hashId) {
+
+                function sendFacebookEvent($pixel_id, $access_token, $event_name, $event_time, $user_data = []) {
+                    // URL для отправки событий в Facebook
+                    $url = "https://graph.facebook.com/v12.0/$pixel_id/events?access_token=$access_token";
+
+                    // Подготовка данных события
+                    $data = [
+                        "data" => [
+                            [
+                                "event_name" => $event_name,
+                                "event_time" => $event_time,
+                                "user_data" => $user_data,
+                                "action_source" => "website",
+                            ]
+                        ]
+                    ];
+
+                    // Преобразование данных в JSON
+                    $json_data = json_encode($data);
+
+                    // Инициализация cURL
+                    $ch = curl_init($url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+                    // Выполнение запроса
+                    $response = curl_exec($ch);
+
+                    // Проверка на ошибки
+                    if (curl_errno($ch)) {
+                        echo 'Error:' . curl_error($ch);
+                    } else {
+                        // Декодирование и вывод ответа
+                        $decoded_response = json_decode($response, true);
+                        print_r($decoded_response);
+                    }
+
+                    // Закрытие cURL сессии
+                    curl_close($ch);
+                }
+
+
+                $user_data = [
+                    "em" => hash('sha256', 'exadawmple@example.com'), // Email должен быть зашифрован с помощью SHA-256
+                    "ph" => hash('sha256', '1232134567890'), // Телефон должен быть зашифрован с помощью SHA-256
+                    "client_ip_address" => $_SERVER['REMOTE_ADDR'], // IP-адрес пользователя
+                    "client_user_agent" => $_SERVER['HTTP_USER_AGENT'], // User-Agent пользователя
+                ];
+
+                sendFacebookEvent(
+                    $pixel_id,
+                    'EAATnh1j31G0BO9O3sngyLPaFUm99EYHk1UkkcN34GLRQxFux7XLbCkMlftpBSXZAgOrZB5ejrfVhSpOQwBRaURhd7Fe9ljFMzWjKT8v03yLz6s1xbDNCjgLAU38sdpx07kZBS79Lq0puxSbyezGmpsxdjdJlbadhqBacG21fszqbZAthh9o1CZB7KHAkflLOnowZDZD', // Замените на ваш Access Token
+                    'Subscribe',
+                    time(),
+                    $user_data
+                );
+
                 return $this->redirect('tg://join?invite=' . $invite_code);
             } else {
                 return $this->redirect('https://google.com');
