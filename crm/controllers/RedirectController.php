@@ -9,8 +9,8 @@ class RedirectController extends Controller
 {
     public function actionIndex($id)
     {
-        $bot_token = (string) \app\models\ChannelForm::find()->select('channel_bot')->where(['hashId' => $id])->scalar();
-        $channel_id = (int) \app\models\ChannelForm::find()->select('channel_id')->where(['hashId' => $id])->scalar();
+        $bot_token = (string)\app\models\ChannelForm::find()->select('channel_bot')->where(['hashId' => $id])->scalar();
+        $channel_id = (int)\app\models\ChannelForm::find()->select('channel_id')->where(['hashId' => $id])->scalar();
         $hashId = $id;
 
         $apiUrl = "https://api.telegram.org/bot$bot_token/createChatInviteLink";
@@ -27,9 +27,6 @@ class RedirectController extends Controller
         curl_close($ch);
 
         $responseData = json_decode($response, true);
-
-        Yii::debug("Telegram API response: " . json_encode($responseData), __METHOD__);
-        Yii::error("Telegram API response: " . json_encode($responseData), __METHOD__);
 
         if (isset($responseData['ok']) && $responseData['ok']) {
             $invite_link = $responseData['result']['invite_link'];
@@ -66,27 +63,24 @@ class RedirectController extends Controller
                 'client_user_agent' => $client_user_agent,
             ])->execute();
 
-            if ($id === $hashId) {
-                $this->sendFacebookEvent(
-                    $pixel_id,
-                    $pixel_api,
-                    'PageView',
-                    time(),
-                    [
-                        "em" => hash('sha256', 'exadawmple@example.com'),
-                        "ph" => hash('sha256', '1232134567890'),
-                        "client_ip_address" => $client_ip_address,
-                        "client_user_agent" => $client_user_agent,
-                    ]
-                );
-
-                return $this->redirect('tg://join?invite=' . $invite_code);
-            } else {
-                return $this->redirect('https://google.com');
-            }
+            return $this->render('index', ['id' => $id, 'invite_code' => $invite_code, 'pixel_id' => $pixel_id, 'pixel_api' => $pixel_api]);
+            // $this->sendFacebookEvent(
+            //  $pixel_id,
+            //  $pixel_api,
+            //  'PageView',
+            // time(),
+            //  [
+            //     "em" => hash('sha256', 'exadawmple@example.com'),
+            //    "ph" => hash('sha256', '1232134567890'),
+            //      "client_ip_address" => $client_ip_address,
+            //     "client_user_agent" => $client_user_agent,
+            // ]
+            //  );
+            // return $this->redirect('tg://join?invite=' . $invite_code);
         } else {
             Yii::error("Telegram API error: " . json_encode($responseData), __METHOD__);
-            return $this->render('index', ['id' => $id]);
+            // return $this->render('index', ['id' => $id]);
+            return $this->redirect('https://google.com');
         }
     }
 

@@ -22,7 +22,8 @@
         "telegram-bot-php/core": "^1.1",
         "guzzlehttp/guzzle": "^7.9",
       "ext-curl": "*",
-      "ext-json": "*"
+      "ext-json": "*",
+        "facebook/php-business-sdk": "^20.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
