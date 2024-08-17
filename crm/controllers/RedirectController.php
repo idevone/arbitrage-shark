@@ -64,7 +64,7 @@ class RedirectController extends Controller
                 $this->sendFacebookEvent(
                     $pixel_id,
                     'EAATnh1j31G0BO9O3sngyLPaFUm99EYHk1UkkcN34GLRQxFux7XLbCkMlftpBSXZAgOrZB5ejrfVhSpOQwBRaURhd7Fe9ljFMzWjKT8v03yLz6s1xbDNCjgLAU38sdpx07kZBS79Lq0puxSbyezGmpsxdjdJlbadhqBacG21fszqbZAthh9o1CZB7KHAkflLOnowZDZD', // Access Token
-                    'Subscribe',
+                    'PageView',
                     time(),
                     [
                         "em" => hash('sha256', 'exadawmple@example.com'),
@@ -86,7 +86,7 @@ class RedirectController extends Controller
 
     private function sendFacebookEvent($pixel_id, $access_token, $event_name, $event_time, $user_data = [])
     {
-        $url = "https://graph.facebook.com/v12.0/$pixel_id/events?access_token=$access_token";
+        $url = "https://graph.facebook.com/v12.0/$pixel_id/events";
 
         $data = [
             "data" => [
@@ -96,7 +96,9 @@ class RedirectController extends Controller
                     "user_data" => $user_data,
                     "action_source" => "website",
                 ]
-            ]
+            ],
+            "access_token" => $access_token,
+            "test_event_code" => "TEST8520",
         ];
 
         $json_data = json_encode($data);
