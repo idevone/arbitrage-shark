@@ -1,13 +1,22 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $id string */
+/* @var $invite_link string */
+/* @var $pixel_id string */
 ?>
-<h1>Channel: <?= \yii\helpers\Html::encode($id) ?></h1>
 
-<?php if ($id == '1'): ?>
-    <p>This is content for Channel 1.</p>
-<?php elseif ($id == '2'): ?>
-    <p>This is content for Channel 2.</p>
-<?php else: ?>
-    <p>This is dynamic content for Channel <?= \yii\helpers\Html::encode($id) ?>.</p>
-<?php endif; ?>
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '<?= $pixel_id ?>'); // Здесь PHP переменная используется для замены на ваш Pixel ID
+    fbq('track', 'PageView');
+
+    window.location.href = 'tg://join?invite=<?= $invite_link ?>';
+</script>
+
