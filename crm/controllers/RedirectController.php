@@ -58,6 +58,7 @@ class RedirectController extends Controller
                 'ad_name' => $ad_name,
                 'placement' => $placement,
                 'site_source_name' => $site_source_name,
+                'status' => 'PageView',
                 'fbclid' => $fbclid,
                 'invite_code' => $invite_code,
                 'created_at' => date('Y-m-d H:i:s'),
