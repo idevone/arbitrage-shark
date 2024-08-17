@@ -15,6 +15,7 @@ use yii\web\ForbiddenHttpException;
 use yii\widgets\Menu;
 
 $currentRoute = Yii::$app->controller->route;
+$controller = Yii::$app->controller->id;
 
 AppAsset::register($this);
 
@@ -144,7 +145,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <main id="main" class="d-flex flex-nowrap" role="main">
 
-    <?php if (!Yii::$app->user->isGuest): ?>
+    <?php if (!Yii::$app->user->isGuest && $controller !== 'redirect'): ?>
 
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; min-height: 100vh">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">

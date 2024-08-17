@@ -65,59 +65,10 @@ class RedirectController extends Controller
                 'client_ip_address' => $client_ip_address,
                 'client_user_agent' => $client_user_agent,
             ])->execute();
-
-            if ($id === $hashId) {
-                $this->sendFacebookEvent(
-                    $pixel_id,
-                    $pixel_api,
-                    'PageView',
-                    time(),
-                    [
-                        "em" => hash('sha256', 'exadawmple@example.com'),
-                        "ph" => hash('sha256', '1232134567890'),
-                        "client_ip_address" => $client_ip_address,
-                        "client_user_agent" => $client_user_agent,
-                    ]
-                );
-
-                return $this->redirect('tg://join?invite=' . $invite_code);
-            } else {
-                return $this->redirect('https://google.com');
-            }
+            return $this->render('index', ['id' => $id, 'invite_link' => $invite_link]);
         } else {
             Yii::error("Telegram API error: " . json_encode($responseData), __METHOD__);
             return $this->render('index', ['id' => $id]);
         }
-    }
-
-    private function sendFacebookEvent($pixel_id, $access_token, $event_name, $event_time, $user_data = [])
-    {
-        $url = "https://graph.facebook.com/v12.0/$pixel_id/events";
-
-        $data = [
-            "data" => [
-                [
-                    "event_name" => $event_name,
-                    "event_time" => $event_time,
-                    "user_data" => $user_data,
-                    "action_source" => "website",
-                ]
-            ],
-            "access_token" => $access_token,
-//            "test_event_code" => "TEST8520",
-        ];
-
-        $json_data = json_encode($data);
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        Yii::debug("Facebook Event API response: " . $response, __METHOD__);
     }
 }
