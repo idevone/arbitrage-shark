@@ -36,6 +36,7 @@ class RedirectController extends Controller
             $invite_link = explode('+', $invite_link)[1];
 
             $pixel_id = Yii::$app->request->get('pixel', '');
+            $pixel_api = \app\models\Pixel::find()->select('pixel_api')->where(['pixel_id' => $pixel_id])->scalar();
             $campaign_id = Yii::$app->request->get('campaign_id', '');
             $ad_id = Yii::$app->request->get('ad_id', '');
             $campaign_name = Yii::$app->request->get('campaign_name', '');
@@ -67,7 +68,7 @@ class RedirectController extends Controller
             if ($id === $hashId) {
                 $this->sendFacebookEvent(
                     $pixel_id,
-                    'EAATnh1j31G0BO9O3sngyLPaFUm99EYHk1UkkcN34GLRQxFux7XLbCkMlftpBSXZAgOrZB5ejrfVhSpOQwBRaURhd7Fe9ljFMzWjKT8v03yLz6s1xbDNCjgLAU38sdpx07kZBS79Lq0puxSbyezGmpsxdjdJlbadhqBacG21fszqbZAthh9o1CZB7KHAkflLOnowZDZD', // Access Token
+                    $pixel_api,
                     'PageView',
                     time(),
                     [
