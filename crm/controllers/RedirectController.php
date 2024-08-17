@@ -98,7 +98,7 @@ class RedirectController extends Controller
                 ]
             ],
             "access_token" => $access_token,
-            "test_event_code" => "TEST8520",
+//            "test_event_code" => "TEST8520",
         ];
 
         $json_data = json_encode($data);
