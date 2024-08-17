@@ -45,6 +45,8 @@ class RedirectController extends Controller
             $site_source_name = Yii::$app->request->get('site_source_name', '');
             $fbclid = Yii::$app->request->get('fbclid', '');
             $invite_code = $invite_link;
+            $client_ip_address = $_SERVER['REMOTE_ADDR'];
+            $client_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
             Yii::$app->db->createCommand()->insert('audience', [
                 'pixel_id' => $pixel_id,
@@ -58,6 +60,8 @@ class RedirectController extends Controller
                 'fbclid' => $fbclid,
                 'invite_code' => $invite_code,
                 'created_at' => date('Y-m-d H:i:s'),
+                'client_ip_address' => $client_ip_address,
+                'client_user_agent' => $client_user_agent,
             ])->execute();
 
             if ($id === $hashId) {
@@ -69,8 +73,8 @@ class RedirectController extends Controller
                     [
                         "em" => hash('sha256', 'exadawmple@example.com'),
                         "ph" => hash('sha256', '1232134567890'),
-                        "client_ip_address" => $_SERVER['REMOTE_ADDR'],
-                        "client_user_agent" => $_SERVER['HTTP_USER_AGENT'],
+                        "client_ip_address" => $client_ip_address,
+                        "client_user_agent" => $client_user_agent,
                     ]
                 );
 
