@@ -15,7 +15,7 @@
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '<?= $pixel_id ?>');
-    fbq('track', 'PageView');
+    fbq('track', 'Subscribe');
 
     window.location.href = 'tg://join?invite=<?= $invite_link ?>';
 </script>
