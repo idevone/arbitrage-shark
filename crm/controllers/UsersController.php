@@ -41,7 +41,7 @@ class UsersController extends Controller
                 $model->generateAuthKey();
                 $model->generateAccessToken();
                 $model->role = Yii::$app->request->post('User')['role'];
-                $model->status = 'active';
+                $model->status = 'Active';
                 $model->created_at = date('Y-m-d H:i:s');
                 $model->updated_at = date('Y-m-d H:i:s');
                 $model->telegram_accounts = '[]';

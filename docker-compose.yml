@@ -25,16 +25,5 @@ services:
     networks:
       - yii2_network
 
-  bot-service:
-    build:
-      context: ./bot-service
-      dockerfile: Dockerfile
-    container_name: bot-service
-    restart: always
-    volumes:
-      - ./bot-service:/var/www/html/arbitrage-shark/bot-service
-    networks:
-      - yii2_network
-
 networks:
   yii2_network:

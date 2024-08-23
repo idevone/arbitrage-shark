@@ -168,7 +168,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             //            ]);
             ?>
 
-            <?php if (Yii::$app->user->identity->role == 'TeamleadMediabuyer' || Yii::$app->user->identity->role == 'Admin' || Yii::$app->user->identity->role == 'Mediabuyer') { ?>
+            <?php if (Yii::$app->user->identity->role == 'TeamLeadMediabuyer' || Yii::$app->user->identity->role == 'Admin' || Yii::$app->user->identity->role == 'Mediabuyer') { ?>
                 <span class="fs-6 text-secondary mt-3">Отдел медиабаинга</span>
                 <?php
                 $items = [];
@@ -300,55 +300,73 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 ]);
             } ?>
 
-            <?php if (Yii::$app->user->identity->role == 'Admin') { ?>
+            <?php if (Yii::$app->user->identity->role == 'Admin' || Yii::$app->user->identity->role == 'TeamLeadMediabuyer') { ?>
                 <span class="fs-6 text-secondary mt-3">Администрирование</span>
                 <?php
+
+                $items = [];
+
+                if (Yii::$app->user->identity->role == 'Admin') {
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#users"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Пользователи',
+                        'url' => ['/users/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/users' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#channel"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Telegram каналы',
+                        'url' => ['/channels/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'site/accounts' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#telegram"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Telegram аккаунты',
+                        'url' => ['/accounts/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'view/accounts' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#cash"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Настройка кассы',
+                        'url' => ['/cashdesk/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/cashdesk/index' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#facebook"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Facebook Pixel',
+                        'url' => ['/pixel/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/pixel/index' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#proxy"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Просмотр Proxy',
+                        'url' => ['/proxy/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/proxy' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#user"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Клиенты каналов',
+                        'url' => ['/audience/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/audience' ? ' active' : '')],
+                    ];
+                } elseif (Yii::$app->user->identity->role == 'TeamLeadMediabuyer') {
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#channel"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Telegram каналы',
+                        'url' => ['/channels/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'site/accounts' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#facebook"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Facebook Pixel',
+                        'url' => ['/pixel/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/pixel/index' ? ' active' : '')],
+                    ];
+                }
+
                 echo Nav::widget([
                     'options' => ['class' => 'nav nav-pills flex-column '],
-                    'items' => [
-                        [
-                            'label' => Html::tag('svg', '<use xlink:href="#users"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Пользователи',
-                            'url' => ['/users/index'],
-                            'encode' => false,
-                            'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/users' ? ' active' : '')],
-                        ],
-                        [
-                            'label' => Html::tag('svg', '<use xlink:href="#channel"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Telegram каналы',
-                            'url' => ['/channels/index'],
-                            'encode' => false,
-                            'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'site/accounts' ? ' active' : '')],
-                        ],
-                        [
-                            'label' => Html::tag('svg', '<use xlink:href="#telegram"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Telegram аккаунты',
-                            'url' => ['/accounts/index'],
-                            'encode' => false,
-                            'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'view/accounts' ? ' active' : '')],
-                        ],
-                        [
-                            'label' => Html::tag('svg', '<use xlink:href="#cash"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Настройка кассы',
-                            'url' => ['/cashdesk/index'],
-                            'encode' => false,
-                            'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/cashdesk/index' ? ' active' : '')],
-                        ],
-                        [
-                            'label' => Html::tag('svg', '<use xlink:href="#facebook"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Facebook Pixel',
-                            'url' => ['/pixel/index'],
-                            'encode' => false,
-                            'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/pixel/index' ? ' active' : '')],
-                        ],
-                        [
-                            'label' => Html::tag('svg', '<use xlink:href="#proxy"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Просмотр Proxy',
-                            'url' => ['/proxy/index'],
-                            'encode' => false,
-                            'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/proxy' ? ' active' : '')],
-                        ],
-                        [
-                            'label' => Html::tag('svg', '<use xlink:href="#user"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Клиенты каналов',
-                            'url' => ['/audience/index'],
-                            'encode' => false,
-                            'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/audience' ? ' active' : '')],
-                        ],
-                    ]
+                    'items' => $items
                 ]);
             } ?>
 
