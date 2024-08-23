@@ -172,7 +172,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <span class="fs-6 text-secondary mt-3">Отдел медиабаинга</span>
                 <?php
                 $items = [];
-                if (Yii::$app->user->identity->role == 'TeamleadMediabuyer' || Yii::$app->user->identity->role == 'Admin') {
+                if (Yii::$app->user->identity->role == 'TeamLeadMediabuyer' || Yii::$app->user->identity->role == 'Admin') {
                     $items[] = [
                         'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Моя статистика',
                         'url' => ['/mediabuyers/buyers'],
