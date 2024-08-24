@@ -56,20 +56,6 @@ class ChannelsGridView extends Widget
                     'attribute' => 'telegram_account',
                     'label' => 'Аккаунт телеграм',
                 ],
-//                [
-//                    'attribute' => 'channel_bot',
-//                    'label' => 'Токен бота',
-//                    'value' => function ($model) {
-//                        return Html::encode(substr($model->channel_bot, 0, 5) . '...' . substr($model->channel_bot, -5));
-//                    },
-//                ],
-//                [
-//                    'attribute' => 'btn_link',
-//                    'label' => 'Ссылка на кнопку',
-//                    'value' => function ($model) {
-//                        return Html::encode(substr($model->btn_link, 0, 5) . '...' . substr($model->btn_link, -5));
-//                    },
-//                ],
                 [
                     'attribute' => 'created_at',
                     'label' => 'Дата создания',

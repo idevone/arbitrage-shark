@@ -7,11 +7,11 @@ use yii\grid\GridView;
 
 $query = TrafficData::find()
     ->select([
-        'channel',
+        'channel_name',
         'COUNT(DISTINCT fbclid) AS unique_fbclid_count',
         'COUNT(DISTINCT user_id) AS unique_user_id_count',
     ])
-    ->groupBy('channel')
+    ->groupBy('channel_name')
     ->asArray()
     ->all();
 
@@ -26,7 +26,7 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'summary' => 'Итог: {totalCount} записей',
     'columns' => [
-        ['attribute' => 'channel', 'label' => 'Канал'],
+        ['attribute' => 'channel_name', 'label' => 'Канал'],
         ['attribute' => 'unique_fbclid_count', 'label' => 'Клики'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Подписчиков'],
         ['attribute' => 'unique_user_id_count', 'label' => 'Диалогов', 'value' => function() {

@@ -18,6 +18,12 @@ $this->title = 'Facebook Pixels';
         <?= Html::button('Добавить новый пиксель', ['value' => \yii\helpers\Url::to(['pixel/create']), 'class' => 'btn btn-primary', 'id' => 'modalButton']) ?>
     </p>
 
+    <?php
+    if (Yii::$app->session->hasFlash('success')) {
+        echo '<div class="alert alert-success">' . Yii::$app->session->getFlash('success') . '</div>';
+    }
+    ?>
+
     <?php $tabItems = [
         [
             'label' => 'Мои пиксели',
@@ -34,7 +40,6 @@ $this->title = 'Facebook Pixels';
     }
     echo Tabs::widget([
         'items' => $tabItems,
-
     ]); ?>
 
     <?php
@@ -58,6 +63,13 @@ $this->title = 'Facebook Pixels';
                     .find('#modalContent')
                     .load($(this).attr('value'));
             });
+        });
+
+
+        $(document).on('click', '.modalButtonUpdate', function() {
+            $('#modal').modal('show')
+                .find('#modalContent')
+                .load($(this).attr('value'));
         });
         JS;
     $this->registerJs($script);

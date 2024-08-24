@@ -127,21 +127,16 @@ class ChannelsController extends Controller
             }
         }
 
-        // Если это запрос для загрузки формы, проверяем, AJAX ли это запрос
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }
 
-        // Обычная загрузка страницы
         return $this->render('update', [
             'model' => $model,
         ]);
     }
-
-
-
 
     public function actionDelete($id)
     {

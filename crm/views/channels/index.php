@@ -57,7 +57,6 @@ $this->title = 'Telegram каналы';
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-            // alert('Ссылка скопирована: ' + link);
         }
     </script>
 </div>
