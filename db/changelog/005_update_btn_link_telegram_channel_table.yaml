@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dkarp
+      changes:
+        - modifyDataType:
+            columnName: btn_link
+            newDataType: TEXT
+            tableName: telegram_channel

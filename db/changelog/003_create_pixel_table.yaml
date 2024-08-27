@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dkarp
+      changes:
+        - createTable:
+            tableName: pixel
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: owner
+                  type: VARCHAR(255)
+              - column:
+                  name: pixel_title
+                  type: VARCHAR(255)
+              - column:
+                  name: pixel_id
+                  type: VARCHAR(255)
+              - column:
+                  name: pixel_api
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP

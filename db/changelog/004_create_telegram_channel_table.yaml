@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dkarp
+      changes:
+        - createTable:
+            tableName: telegram_channel
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: channel_id
+                  type: VARCHAR(255)
+              - column:
+                  name: channel_name
+                  type: VARCHAR(255)
+              - column:
+                  name: channel_bot
+                  type: VARCHAR(255)
+              - column:
+                  name: fb_pixel
+                  type: VARCHAR(255)
+              - column:
+                  name: telegram_account
+                  type: VARCHAR(255)
+              - column:
+                  name: hashId
+                  type: VARCHAR(255)
+              - column:
+                  name: btn_link
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP

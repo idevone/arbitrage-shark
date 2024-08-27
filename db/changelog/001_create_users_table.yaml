@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dkarp
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: "CREATE TYPE user_role AS ENUM ('Admin', 'Financial', 'TeamLeadMediabuyer', 'Mediabuyer', 'TeamLeadProcessor', 'Processor');"
+
+  - changeSet:
+      id: 2
+      author: dkarp
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: "CREATE TYPE user_status AS ENUM ('Active', 'Inactive', 'Deleted');"
+
+  - changeSet:
+      id: 3
+      author: dkarp
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authKey
+                  type: VARCHAR(255)
+              - column:
+                  name: accessToken
+                  type: VARCHAR(255)
+              - column:
+                  name: role
+                  type: user_role
+                  defaultValue: 'Processor'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: user_status
+                  defaultValue: 'Active'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: telegram_accounts
+                  type: VARCHAR(255)
+                  defaultValue: ''
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 4
+      author: dkarp
+      changes:
+        - addUniqueConstraint:
+            columnNames: username
+            constraintName: unique_username
+            tableName: user
+
+  - changeSet:
+      id: 5
+      author: dkarp
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: "INSERT INTO \"user\" (username, password_hash, \"authKey\", \"accessToken\", role, status, telegram_accounts) VALUES ('dev', '$2a$12$vPXesKG1eZDKhWl6yMC27.K6LMGCUSOOKsGJIBxyGG1v0zLOTKYw6', 'test100key', '100-token', 'Admin', 'Active', '');"

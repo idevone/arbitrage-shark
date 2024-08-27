@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: /changelog/001_create_users_table.yaml
+  - include:
+      file: /changelog/002_create_audience_table.yaml
+  - include:
+      file: /changelog/003_create_pixel_table.yaml
+  - include:
+      file: /changelog/004_create_telegram_channel_table.yaml
