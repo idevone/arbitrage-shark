@@ -46,8 +46,6 @@ $userOptions = ArrayHelper::map($users, 'username', function ($element) {
                 </div>
             </div>
 
-            <?= $form->field($model, 'invite_link')->textInput(['maxlength' => true, 'placeholder' => 'https://t.me/+RuNsUestWWJhNjRi'])->label('Ссылка на канал') ?>
-
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'telegram_account')->textInput(['maxlength' => true, 'placeholder' => '7378948848'])->label('ID Telegram аккаунта') ?>
@@ -58,7 +56,7 @@ $userOptions = ArrayHelper::map($users, 'username', function ($element) {
                 </div>
             </div>
 
-<!--            --><?php //= $form->field($model, 'fb_pixel')->dropDownList($pixelOptions)->label('Pixel') ?>
+            <!--            --><?php //= $form->field($model, 'fb_pixel')->dropDownList($pixelOptions)->label('Pixel') ?>
 
             <?= $form->field($model, 'selectedPixels')->widget(Select2::class, [
                 'data' => $pixelOptions,
@@ -78,6 +76,3 @@ $userOptions = ArrayHelper::map($users, 'username', function ($element) {
         </div>
 
     </div>
-
-<?php
-?>

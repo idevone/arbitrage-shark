@@ -20,13 +20,13 @@ services:
       dockerfile: Dockerfile
     container_name: liquibase
     depends_on:
-      - db
+      - postgresdb
     networks:
       - yii2_network
 
-  db:
+  postgresdb:
     image: postgres:latest
-    container_name: "db"
+    container_name: "postgresdb"
     environment:
       POSTGRES_DB: "postgres"
       POSTGRES_USER: "postgres"
@@ -50,7 +50,7 @@ services:
     volumes:
       - ./backups:/backups
     depends_on:
-      - db
+      - postgresdb
     networks:
       - yii2_network
 
