@@ -113,9 +113,8 @@ class ChannelsController extends Controller
             $model->channel_id = Yii::$app->request->post('ChannelForm')['channel_id'];
             $model->channel_bot = Yii::$app->request->post('ChannelForm')['channel_bot'];
             $model->responsible = Yii::$app->user->id;
-            $model->invite_link = Yii::$app->request->post('ChannelForm')['invite_link'];
             if ($model->fb_pixel === null) {
-               $model->fb_pixel = '';
+                $model->fb_pixel = '';
             } else {
                 $model->fb_pixel = implode(',', Yii::$app->request->post('ChannelForm')['selectedPixels']);
             }
@@ -127,21 +126,16 @@ class ChannelsController extends Controller
             }
         }
 
-        // Если это запрос для загрузки формы, проверяем, AJAX ли это запрос
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }
 
-        // Обычная загрузка страницы
         return $this->render('update', [
             'model' => $model,
         ]);
     }
-
-
-
 
     public function actionDelete($id)
     {
