@@ -5,10 +5,12 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - .:/var/www/html/arbitrage-shark/
       - ./config/server/default.conf:/etc/nginx/conf.d/default.conf
       - ./config/server/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/server/ssl:/etc/nginx/ssl
     depends_on:
       - crm
     networks:
