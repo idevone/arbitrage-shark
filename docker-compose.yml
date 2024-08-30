@@ -2,7 +2,7 @@ services:
   nginx:
     image: nginx:alpine
     container_name: nginx
-    restart: always
+    restart: no
     ports:
       - "80:80"
       - "443:443"
@@ -14,47 +14,16 @@ services:
     depends_on:
       - crm
     networks:
-      - yii2_network
+      - web_network
 
   liquibase:
     build:
       context: ./db
       dockerfile: Dockerfile
     container_name: liquibase
-    depends_on:
-      - postgresdb
+    restart: no
     networks:
-      - yii2_network
-
-  postgresdb:
-    image: postgres:latest
-    container_name: "postgresdb"
-    environment:
-      POSTGRES_DB: "postgres"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - yii2_network
-
-  backup:
-    build: ./backup
-    container_name: db_backup
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-    volumes:
-      - ./backups:/backups
-    depends_on:
-      - postgresdb
-    networks:
-      - yii2_network
+      - web_network
 
   crm:
     build:
@@ -65,11 +34,21 @@ services:
     volumes:
       - ./crm:/var/www/html/arbitrage-shark/crm
     networks:
-      - yii2_network
+      - web_network
 
-volumes:
-  pg_data:
-  backups:
+#  auth-service:
+#    build:
+#      context: ./auth-service
+#      dockerfile: Dockerfile
+#    container_name: auth-service
+#    restart: on-failure
+#    ports:
+#      - "3000:3000"
+#    volumes:
+#      - ./auth-service:/usr/src/app
+#      - /usr/src/app/node_modules
+#    networks:
+#      - yii2_network
 
 networks:
-  yii2_network:
+  web_network:
