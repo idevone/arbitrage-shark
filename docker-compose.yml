@@ -22,8 +22,6 @@ services:
       dockerfile: Dockerfile
     container_name: liquibase
     restart: no
-    depends_on:
-      - postgresdb
     networks:
       - web_network
 
