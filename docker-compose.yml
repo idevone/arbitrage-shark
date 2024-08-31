@@ -38,20 +38,20 @@ services:
     networks:
       - web_network
 
-  postgresdb:
-    image: postgres:latest
-    container_name: "postgresdb"
-    restart: no
-    environment:
-      POSTGRES_DB: "postgres"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - web_network
+#  postgresdb:
+#    image: postgres:latest
+#    container_name: "postgresdb"
+#    restart: no
+#    environment:
+#      POSTGRES_DB: "postgres"
+#      POSTGRES_USER: "postgres"
+#      POSTGRES_PASSWORD: "postgres"
+#    volumes:
+#      - ./pg_data:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - web_network
 
 
 #  auth-service:
