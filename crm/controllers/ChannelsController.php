@@ -34,10 +34,6 @@ class ChannelsController extends Controller
         ];
     }
 
-    /**
-     * @throws RandomException
-     * @throws ServerErrorHttpException
-     */
     public function actionCreate()
     {
         $utm = 'pixel=<?php echo $_GET["pixel"] ?>&campaign_id=<?php echo $_GET["campaign_id"] ?>&adset_id=<?php echo $_GET["adset_id"] ?>&ad_id=<?php echo $_GET["ad_id"] ?>&campaign_name=<?php echo $_GET["campaign_name"] ?>&adset_name=<?php echo $_GET["adset_name"] ?>&ad_name=<?php echo $_GET["ad_name"] ?>&placement=<?php echo $_GET["placement"] ?>&site_source_name=<?php echo $_GET["site_source_name"] ?>&fbclid=<?php echo $_GET["fbclid"] ?>';
@@ -62,7 +58,7 @@ class ChannelsController extends Controller
                     $randomString .= $numbers[random_int(0, strlen($numbers) - 1)];
                 }
                 $channel->hashId = $randomString;
-                $channel->btn_link = 'https://test.top/redirect/' . $channel->hashId . '?' . $utm;
+                $channel->btn_link = 'https://a-shark.co/redirect/' . $channel->hashId . '?' . $utm;
                 $channel->created_at = date('Y-m-d H:i:s');
                 $channel->updated_at = date('Y-m-d H:i:s');
 
