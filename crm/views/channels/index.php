@@ -12,6 +12,14 @@ $this->title = 'Telegram каналы';
 <div class="users-index mt-5">
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php
+    if (Yii::$app->session->hasFlash('success')) {
+        echo '<div class="alert alert-success">' . Yii::$app->session->getFlash('success') . '</div>';
+    } elseif (Yii::$app->session->hasFlash('error')) {
+        echo '<div class="alert alert-danger">' . Yii::$app->session->getFlash('error') . '</div>';
+    }
+    ?>
+
     <p class="mt-5">
         <?= Html::button('Добавить новый канал', ['value' => Url::to(['channels/create']), 'class' => 'btn btn-primary', 'id' => 'modalButtonCreate']) ?>
     </p>
