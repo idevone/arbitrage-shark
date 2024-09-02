@@ -1,14 +1,14 @@
 <?php
 
-use app\models\ChannelForm;
 use app\models\Pixel;
-use app\models\User;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\ChannelForm */
+/* @var $bot app\models\TelegramBot */
 /* @var $form yii\widgets\ActiveForm */
 
 $pixels = Pixel::find()->all();
@@ -16,13 +16,7 @@ $pixelOptions = ArrayHelper::map($pixels, 'pixel_id', function ($element) {
     return $element['pixel_id'] . ' - ' . $element['owner'];
 });
 
-$users = User::find()->where(['role' => 'Mediabuyer'])->all();
-$userOptions = ArrayHelper::map($users, 'username', function ($element) {
-    return $element['username'];
-});
-
 ?>
-
     <div class="channel-create">
 
         <div class="channel-form">
@@ -37,10 +31,13 @@ $userOptions = ArrayHelper::map($users, 'username', function ($element) {
                 <div class="col-md-6">
                     <?= $form->field($model, 'channel_name')->textInput(['maxlength' => true, 'placeholder' => 'Название для системы'])->label('Название канала') ?>
                 </div>
+
                 <div class="col-md-6">
                     <?= $form->field($model, 'channel_id')->textInput(['placeholder' => '-1005456498456'])->label('ID канала') ?>
                 </div>
             </div>
+
+            <?= $form->field($model, 'channel_bot')->textInput(['maxlength' => true, 'placeholder' => '7378948848:AAGsMrHRTi7WCu6-qMPo0MWFZl3A0W1Ii7Q'])->label('Токен для бота') ?>
 
             <div class="row">
                 <div class="col-md-6">
@@ -48,7 +45,7 @@ $userOptions = ArrayHelper::map($users, 'username', function ($element) {
                 </div>
 
                 <div class="col-md-6">
-                    <?= $form->field($model, 'channel_bot')->textInput(['maxlength' => true, 'placeholder' => '7378948848:AAGsMrHRTi7WCu6-qMPo0MWFZl3A0W1Ii7Q'])->label('Токен для бота') ?>
+                    <?= $form->field($bot, 'bot_name')->textInput(['maxlength' => true, 'placeholder' => 'Название для бота'])->label('Название для бота') ?>
                 </div>
             </div>
 

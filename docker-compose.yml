@@ -30,41 +30,26 @@ services:
       context: ./crm
       dockerfile: Dockerfile
     container_name: crm
-    restart: always
+    restart: on-failure
     volumes:
       - ./crm:/var/www/html/arbitrage-shark/crm
     networks:
       - web_network
 
-#  postgresdb:
-#    image: postgres:latest
-#    container_name: "postgresdb"
-#    restart: no
-#    environment:
-#      POSTGRES_DB: "postgres"
-#      POSTGRES_USER: "postgres"
-#      POSTGRES_PASSWORD: "postgres"
-#    volumes:
-#      - ./pg_data:/var/lib/postgresql/data
-#    ports:
-#      - "5432:5432"
-#    networks:
-#      - web_network
-
-
-#  auth-service:
-#    build:
-#      context: ./auth-service
-#      dockerfile: Dockerfile
-#    container_name: auth-service
-#    restart: on-failure
-#    ports:
-#      - "3000:3000"
-#    volumes:
-#      - ./auth-service:/usr/src/app
-#      - /usr/src/app/node_modules
-#    networks:
-#      - yii2_network
+  postgresdb:
+    image: postgres:latest
+    container_name: "postgresdb"
+    restart: no
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - web_network
 
 networks:
   web_network:

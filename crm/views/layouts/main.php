@@ -133,6 +133,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <path fill-rule="evenodd"
               d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
     </symbol>
+    <symbol id="robot" viewBox="0 0 16 16">
+      <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.6 26.6 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.93.93 0 0 1-.765.935c-.845.147-2.34.346-4.235.346s-3.39-.2-4.235-.346A.93.93 0 0 1 3 9.219zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a25 25 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25 25 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135"/>
+      <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2zM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5"/>
+    </symbol>
 </svg>
 <?php $this->beginBody() ?>
 
@@ -153,32 +157,18 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <span class="fs-4">Arbitrage Shark</span>
             </a>
             <hr>
-            <!--            <span class="fs-6 text-secondary">Аналитика</span>-->
-            <!--            --><?php
-            //            echo Nav::widget([
-            //                'options' => ['class' => 'nav nav-pills flex-column '],
-            //                'items' => [
-            //                    [
-            //                        'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Статистика',
-            //                        'url' => ['/'],
-            //                        'encode' => false,
-            //                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'site/index' ? ' active' : '')],
-            //                    ],
-            //                ]
-            //            ]);
-            ?>
 
             <?php if (Yii::$app->user->identity->role == 'TeamLeadMediabuyer' || Yii::$app->user->identity->role == 'Admin' || Yii::$app->user->identity->role == 'Mediabuyer') { ?>
                 <span class="fs-6 text-secondary mt-3">Отдел медиабаинга</span>
                 <?php
                 $items = [];
                 if (Yii::$app->user->identity->role == 'TeamLeadMediabuyer' || Yii::$app->user->identity->role == 'Admin') {
-                    $items[] = [
-                        'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Моя статистика',
-                        'url' => ['/mediabuyers/buyers'],
-                        'encode' => false,
-                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/mediabuyers/buyers' ? ' active' : '')],
-                    ];
+//                    $items[] = [
+//                        'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Моя статистика',
+//                        'url' => ['/mediabuyers/buyers'],
+//                        'encode' => false,
+//                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/mediabuyers/buyers' ? ' active' : '')],
+//                    ];
                     $items[] = [
                         'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Статистика',
                         'url' => ['/mediabuyers/index'],
@@ -206,9 +196,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 } elseif (Yii::$app->user->identity->role == 'Mediabuyer') {
                     $items[] = [
                         'label' => Html::tag('svg', '<use xlink:href="#chart"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Статистика',
-                        'url' => ['/statistic/mediabuyer'],
+                        'url' => ['/mediabuyers/index'],
                         'encode' => false,
-                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/statistic/mediabuyer' ? ' active' : '')],
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/mediabuyers/index' ? ' active' : '')],
                     ];
                     $items[] = [
                         'label' => Html::tag('svg', '<use xlink:href="#report"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Отчеты',
@@ -229,48 +219,48 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 ]);
             } ?>
 
-            <?php if (Yii::$app->user->identity->role == 'TeamLeadProcessor' || Yii::$app->user->identity->role == 'Admin' || Yii::$app->user->identity->role == 'Processor') { ?>
-                <span class="fs-6 text-secondary mt-3">Отдел обработчиков</span>
-                <?php
-                $items = [];
-                if (Yii::$app->user->identity->role == 'TeamLeadProcessor' || Yii::$app->user->identity->role == 'Admin') {
-                    $items[] = [
-                        'label' => Html::tag('svg', '<use xlink:href="#graph-up-arrow"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Статистика',
-                        'url' => ['/statistic/processors'],
-                        'encode' => false,
-                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/statistic/processors' ? ' active' : '')],
-                    ];
-                    $items[] = [
-                        'label' => Html::tag('svg', '<use xlink:href="#users"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Сотрудники',
-                        'url' => ['/users/processors'],
-                        'encode' => false,
-                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'users/processors' ? ' active' : '')],
-                    ];
-                    $items[] = [
-                        'label' => Html::tag('svg', '<use xlink:href="#report"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Отчеты сотрудников',
-                        'url' => ['/reports/processors'],
-                        'encode' => false,
-                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'reports/processors' ? ' active' : '')],
-                    ];
-                } elseif (Yii::$app->user->identity->role == 'Processor') {
-                    $items[] = [
-                        'label' => Html::tag('svg', '<use xlink:href="#graph-up-arrow"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Статистика',
-                        'url' => ['/statistic/processors'],
-                        'encode' => false,
-                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/statistic/processors' ? ' active' : '')],
-                    ];
-                    $items[] = [
-                        'label' => Html::tag('svg', '<use xlink:href="#report"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Отчеты сотрудников',
-                        'url' => ['/reports/processors'],
-                        'encode' => false,
-                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'reports/processors' ? ' active' : '')],
-                    ];
-                }
-                echo Nav::widget([
-                    'options' => ['class' => 'nav nav-pills flex-column '],
-                    'items' => $items
-                ]);
-            } ?>
+<!--            --><?php //if (Yii::$app->user->identity->role == 'TeamLeadProcessor' || Yii::$app->user->identity->role == 'Admin' || Yii::$app->user->identity->role == 'Processor') { ?>
+<!--                <span class="fs-6 text-secondary mt-3">Отдел обработчиков</span>-->
+<!--                --><?php
+//                $items = [];
+//                if (Yii::$app->user->identity->role == 'TeamLeadProcessor' || Yii::$app->user->identity->role == 'Admin') {
+//                    $items[] = [
+//                        'label' => Html::tag('svg', '<use xlink:href="#graph-up-arrow"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Статистика',
+//                        'url' => ['/statistic/processors'],
+//                        'encode' => false,
+//                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/statistic/processors' ? ' active' : '')],
+//                    ];
+//                    $items[] = [
+//                        'label' => Html::tag('svg', '<use xlink:href="#users"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Сотрудники',
+//                        'url' => ['/users/processors'],
+//                        'encode' => false,
+//                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'users/processors' ? ' active' : '')],
+//                    ];
+//                    $items[] = [
+//                        'label' => Html::tag('svg', '<use xlink:href="#report"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Отчеты сотрудников',
+//                        'url' => ['/reports/processors'],
+//                        'encode' => false,
+//                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'reports/processors' ? ' active' : '')],
+//                    ];
+//                } elseif (Yii::$app->user->identity->role == 'Processor') {
+//                    $items[] = [
+//                        'label' => Html::tag('svg', '<use xlink:href="#graph-up-arrow"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Статистика',
+//                        'url' => ['/statistic/processors'],
+//                        'encode' => false,
+//                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/statistic/processors' ? ' active' : '')],
+//                    ];
+//                    $items[] = [
+//                        'label' => Html::tag('svg', '<use xlink:href="#report"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . ' Отчеты сотрудников',
+//                        'url' => ['/reports/processors'],
+//                        'encode' => false,
+//                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'reports/processors' ? ' active' : '')],
+//                    ];
+//                }
+//                echo Nav::widget([
+//                    'options' => ['class' => 'nav nav-pills flex-column '],
+//                    'items' => $items
+//                ]);
+//            } ?>
 
             <?php if (Yii::$app->user->identity->role == 'Financial' || Yii::$app->user->identity->role == 'Admin') { ?>
                 <span class="fs-6 text-secondary mt-3">Отдел финансов</span>
@@ -324,6 +314,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         'url' => ['/accounts/index'],
                         'encode' => false,
                         'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'view/accounts' ? ' active' : '')],
+                    ];
+                    $items[] = [
+                        'label' => Html::tag('svg', '<use xlink:href="#robot"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Боты каналов',
+                        'url' => ['/bots/index'],
+                        'encode' => false,
+                        'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'bots/index' ? ' active' : '')],
                     ];
                     $items[] = [
                         'label' => Html::tag('svg', '<use xlink:href="#cash"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Настройка кассы',

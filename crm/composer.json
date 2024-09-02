@@ -23,7 +23,8 @@
         "guzzlehttp/guzzle": "^7.9",
       "ext-curl": "*",
       "ext-json": "*",
-        "facebook/php-business-sdk": "^20.0"
+        "facebook/php-business-sdk": "^20.0",
+        "smi2/phpclickhouse": "^1.5"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
