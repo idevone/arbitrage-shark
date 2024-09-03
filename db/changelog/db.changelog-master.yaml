@@ -7,3 +7,7 @@ databaseChangeLog:
       file: /changelog/003_create_pixel_table.yaml
   - include:
       file: /changelog/004_create_telegram_channel_table.yaml
+  - include:
+      file: /changelog/005_update_btn_link_telegram_channel_table.yaml
+  - include:
+      file: /changelog/006_create_channel_bots_table.yaml

@@ -14,6 +14,14 @@ $this->title = 'Facebook Pixels';
 <div class="users-index mt-5">
     <h1><?= Html::encode($this->title) ?></h1>
 
+  <?php
+    if (Yii::$app->session->hasFlash('success')) {
+        echo '<div class="alert alert-success">' . Yii::$app->session->getFlash('success') . '</div>';
+    } elseif (Yii::$app->session->hasFlash('error')) {
+        echo '<div class="alert alert-danger">' . Yii::$app->session->getFlash('error') . '</div>';
+    }
+  ?>
+
     <p class="mt-5">
         <?= Html::button('Добавить новый пиксель', ['value' => \yii\helpers\Url::to(['pixel/create']), 'class' => 'btn btn-primary', 'id' => 'modalButton']) ?>
     </p>
@@ -34,7 +42,6 @@ $this->title = 'Facebook Pixels';
     }
     echo Tabs::widget([
         'items' => $tabItems,
-
     ]); ?>
 
     <?php

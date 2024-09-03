@@ -2,31 +2,44 @@ services:
   nginx:
     image: nginx:alpine
     container_name: nginx
-    restart: always
+    restart: no
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - .:/var/www/html/arbitrage-shark/
       - ./config/server/default.conf:/etc/nginx/conf.d/default.conf
       - ./config/server/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/server/ssl:/etc/nginx/ssl
     depends_on:
       - crm
     networks:
-      - yii2_network
+      - web_network
 
   liquibase:
     build:
       context: ./db
       dockerfile: Dockerfile
     container_name: liquibase
-    depends_on:
-      - db
+    restart: no
     networks:
-      - yii2_network
+      - web_network
 
-  db:
+  crm:
+    build:
+      context: ./crm
+      dockerfile: Dockerfile
+    container_name: crm
+    restart: on-failure
+    volumes:
+      - ./crm:/var/www/html/arbitrage-shark/crm
+    networks:
+      - web_network
+
+  postgresdb:
     image: postgres:latest
-    container_name: "db"
+    container_name: "postgresdb"
+    restart: no
     environment:
       POSTGRES_DB: "postgres"
       POSTGRES_USER: "postgres"
@@ -36,38 +49,8 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - yii2_network
-
-  backup:
-    build: ./backup
-    container_name: db_backup
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-    volumes:
-      - ./backups:/backups
-    depends_on:
-      - db
-    networks:
-      - yii2_network
-
-  crm:
-    build:
-      context: ./crm
-      dockerfile: Dockerfile
-    container_name: crm
-    restart: always
-    volumes:
-      - ./crm:/var/www/html/arbitrage-shark/crm
-    networks:
-      - yii2_network
-
-volumes:
-  pg_data:
-  backups:
+      - web_network
 
 networks:
-  yii2_network:
+  web_network:
+    driver: bridge

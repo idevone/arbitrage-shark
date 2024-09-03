@@ -9,7 +9,6 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property string $owner
- * @property string $channel
  * @property string $pixel_title
  * @property string $pixel_id
  * @property string $pixel_api
@@ -27,8 +26,8 @@ class Pixel extends ActiveRecord
     public function rules(): array
     {
         return [
-            [['owner', 'channel', 'pixel_id', 'pixel_api', 'created_at', 'updated_at'], 'required'],
-            [['owner', 'channel', 'pixel_id', 'pixel_api', 'created_at', 'updated_at'], 'string', 'max' => 255],
+            [['owner', 'pixel_id', 'pixel_api', 'created_at', 'updated_at'], 'required'],
+            [['owner', 'pixel_id', 'pixel_api', 'created_at', 'updated_at'], 'string', 'max' => 255],
             [['pixel_id', 'pixel_api'], 'unique'],
         ];
     }
