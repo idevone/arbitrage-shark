@@ -36,32 +36,6 @@ services:
     networks:
       - web_network
 
-  postgresdb:
-    image: postgres:latest
-    container_name: "postgresdb"
-    restart: no
-    environment:
-      POSTGRES_DB: "postgres"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - web_network
-
-  bot-service:
-    build:
-      context: ./bot-service
-      dockerfile: Dockerfile
-    container_name: bot-service
-    restart: on-failure
-    volumes:
-      - ./bot-service:/var/www/html/arbitrage-shark/bot-service
-    networks:
-      - web_network
-
 networks:
   web_network:
     driver: bridge
