@@ -58,6 +58,7 @@ $config = [
             ],
         ],
     ],
+    'defaultRoute' => 'mediabuyers/index',
     'params' => $params,
 ];
 

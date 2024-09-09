@@ -262,7 +262,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 //                ]);
 //            } ?>
 
-            <?php if (Yii::$app->user->identity->role == 'Financial' || Yii::$app->user->identity->role == 'Admin') { ?>
+            <?php /*if (Yii::$app->user->identity->role == 'Financial' || Yii::$app->user->identity->role == 'Admin') { ?>
                 <span class="fs-6 text-secondary mt-3">Отдел финансов</span>
                 <?php
                 echo Nav::widget([
@@ -288,7 +288,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         ],
                     ]
                 ]);
-            } ?>
+            } */?>
 
             <?php if (Yii::$app->user->identity->role == 'Admin' || Yii::$app->user->identity->role == 'TeamLeadMediabuyer') { ?>
                 <span class="fs-6 text-secondary mt-3">Администрирование</span>
@@ -315,7 +315,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         'encode' => false,
                         'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == 'view/accounts' ? ' active' : '')],
                     ];
-                    $items[] = [
+                  /*  $items[] = [
                         'label' => Html::tag('svg', '<use xlink:href="#robot"></use>', ['class' => 'bi pe-none me-2', 'width' => 16, 'height' => 16]) . 'Боты каналов',
                         'url' => ['/bots/index'],
                         'encode' => false,
@@ -357,7 +357,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         'url' => ['/pixel/index'],
                         'encode' => false,
                         'linkOptions' => ['class' => 'nav-item nav-link text-white' . ($currentRoute == '/pixel/index' ? ' active' : '')],
-                    ];
+                    ];*/
                 }
 
                 echo Nav::widget([
