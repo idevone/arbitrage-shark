@@ -51,6 +51,17 @@ services:
     networks:
       - web_network
 
+  bot-service:
+    build:
+      context: ./bot-service
+      dockerfile: Dockerfile
+    container_name: bot-service
+    restart: on-failure
+    volumes:
+      - ./bot-service:/var/www/html/arbitrage-shark/bot-service
+    networks:
+      - web_network
+
 networks:
   web_network:
     driver: bridge
