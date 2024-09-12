@@ -14,7 +14,9 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '<?= $pixel_id ?>', {'external_id': <?= $invite_link ?>});
+    fbq('init', '<?= $pixel_id ?>', {
+        'external_id': '<?= $invite_link ?>'
+    });
     fbq('track', 'PageView');
 
     window.location.href = 'tg://join?invite=<?= $invite_link ?>';
