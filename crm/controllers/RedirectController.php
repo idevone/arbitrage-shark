@@ -33,7 +33,7 @@ class RedirectController extends Controller
                 $ad_id = Yii::$app->request->get('ad_id', '');
                 $campaign_name = Yii::$app->request->get('campaign_name', '');
                 $adset_name = Yii::$app->request->get('adset_name', '');
-                $adset_id = Yii::$app->request->get('$adset_id', '');
+                $adset_id = Yii::$app->request->get('adset_id', '');
                 $ad_name = Yii::$app->request->get('ad_name', '');
                 $placement = Yii::$app->request->get('placement', '');
                 $site_source_name = Yii::$app->request->get('site_source_name', '');
