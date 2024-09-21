@@ -46,11 +46,11 @@ $this->title = 'Медиа статистика';
 
         <div class="row">
             <div class="col-md-3">
-                <?= $form->field($model, 'startDate')->input('date') ?>
+                <?= $form->field($model, 'startDate')->input('date')->label('От начала даты') ?>
             </div>
 
             <div class="col-md-3">
-                <?= $form->field($model, 'endDate')->input('date') ?>
+                <?= $form->field($model, 'endDate')->input('date')->label('До конца даты') ?>
             </div>
 
             <div class="col-md-6">
