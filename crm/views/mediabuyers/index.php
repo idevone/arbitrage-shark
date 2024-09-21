@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
+use app\models\FilterForm;
 
 $channels = ChannelForm::find()->select(['id', 'channel_name'])->asArray()->all();
 $channelList = ArrayHelper::map($channels, 'id', 'channel_name');
@@ -43,12 +44,28 @@ $this->title = 'Медиа статистика';
 
         ], ['prompt' => 'Select Grouping']) ?>
 
-        <?= $form->field($model, 'startDate')->input('date') ?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'channel_name')->dropDownList($channelList, ['prompt' => 'Select Channel']) ?>
+            </div>
+
+            <div class="col-md-6">
+                <?= $form->field($model, 'pixel_id')->dropDownList($pixelList, ['prompt' => 'Select Pixel']) ?>
+            </div>
+        </div>
+
+
         <?= $form->field($model, 'endDate')->input('date') ?>
 
-        <?= $form->field($model, 'channel_name')->dropDownList($channelList, ['prompt' => 'Select Channel']) ?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'channel_name')->dropDownList($channelList, ['prompt' => 'Select Channel']) ?>
+            </div>
 
-        <?= $form->field($model, 'pixel_id')->dropDownList($pixelList, ['prompt' => 'Select Pixel']) ?>
+            <div class="col-md-6">
+                <?= $form->field($model, 'pixel_id')->dropDownList($pixelList, ['prompt' => 'Select Pixel']) ?>
+            </div>
+        </div>
 
         <div class="form-group">
             <?= Html::submitButton('Filter', ['class' => 'btn btn-primary']) ?>
@@ -58,19 +75,64 @@ $this->title = 'Медиа статистика';
         <?php ActiveForm::end(); ?>
     </div>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            'campaign_id',
-            'ad_id',
-            'created_at',
-            [
-                'attribute' => 'count',
-                'label' => 'Count',
-                'value' => function ($data) {
-                    return $data['count'];
-                },
+    <?php if (!empty($model->groupBy)) {
+        echo GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                [
+                    'label' => 'Группировка',
+                    'value' => function ($model) {
+                        if (is_object($model) && property_exists($model, 'groupBy')) {
+                            return $model->{$model->groupBy};
+                        } elseif (is_array($model) && array_key_exists('groupBy', $model)) {
+                            return $model[$model['groupBy']];
+                        } else {
+                            return null;
+                        }
+                    },
+                ],
+                [
+                    'label' => 'Кликов',
+                    'value' => function ($model) {
+
+                    },
+                ],
+                [
+                    'attribute' => 'campaign_name',
+                    'label' => 'Название компании',
+                ],
+                [
+                    'attribute' => 'ad_id',
+                    'label' => 'ID объявления',
+                ],
+                [
+                    'attribute' => 'adset_id',
+                    'label' => 'ID группы объявлений',
+                ],
+                [
+                    'attribute' => 'adset_name',
+                    'label' => 'Название группы объявлений',
+                ],
+                [
+                    'attribute' => 'site_source_name',
+                    'label' => 'Источник трафика',
+                ],
+                [
+                    'attribute' => 'placement',
+                    'label' => 'Место размещения',
+                ],
+                [
+                    'attribute' => 'count',
+                    'label' => 'Количество',
+                ],
             ],
-        ],
-    ]); ?>
+        ]);
+        echo $model->groupBy . '<br>';
+        echo $model->groupBy[0] . '<br>';
+        echo $model->groupBy[1] . '<br>';
+        echo $model->groupBy[2] . '<br>';
+        echo $model->groupBy[3] . '<br>';
+    } else {
+        echo 'Пожалуйста, выберите группировку для отображения данных';
+    } ?>
 </div>

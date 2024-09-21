@@ -18,11 +18,6 @@ class MediabuyersController extends Controller
             ->from('audience');
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if (!empty($model->channel_name)) {
-                $query->andWhere(['channel_name' => $model->channel_name]);
-            }
-
-
             if ($model->groupBy === 'campaign_id') {
                 $query->select([
                     'campaign_id',
