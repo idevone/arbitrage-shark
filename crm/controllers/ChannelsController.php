@@ -61,12 +61,8 @@ class ChannelsController extends Controller
                 $channel->btn_link = 'https://a-shark.co/redirect/' . $channel->hashId . '?' . $utm;
                 $channel->created_at = date('Y-m-d H:i:s');
                 $channel->updated_at = date('Y-m-d H:i:s');
-
-                $bot->bot_name = Yii::$app->request->post('TelegramBot')['bot_name'];
-                $bot->bot_token = $channel->channel_bot;
-                $bot->channel_id = $channel->channel_id;
                 try {
-                    if (!$bot->save() || !$channel->save()) {
+                    if (!$channel->save()) {
                         Yii::$app->session->setFlash('error', 'Ошибка при сохранении данных.' . json_encode($bot->errors));
                         return $this->redirect(['index']);
                     }

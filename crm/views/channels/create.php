@@ -37,7 +37,6 @@ $pixelOptions = ArrayHelper::map($pixels, 'pixel_id', function ($element) {
                 </div>
             </div>
 
-            <?= $form->field($model, 'channel_bot')->textInput(['maxlength' => true, 'placeholder' => '7378948848:AAGsMrHRTi7WCu6-qMPo0MWFZl3A0W1Ii7Q'])->label('Токен для бота') ?>
 
             <div class="row">
                 <div class="col-md-6">
@@ -45,7 +44,7 @@ $pixelOptions = ArrayHelper::map($pixels, 'pixel_id', function ($element) {
                 </div>
 
                 <div class="col-md-6">
-                    <?= $form->field($bot, 'bot_name')->textInput(['maxlength' => true, 'placeholder' => 'Название для бота'])->label('Название для бота') ?>
+                    <?= $form->field($model, 'channel_bot')->textInput(['maxlength' => true, 'placeholder' => '7378948848:AAGsMrHRTi7WCu6-qMPo0MWFZl3A0W1Ii7Q'])->label('Токен для бота') ?>
                 </div>
             </div>
 

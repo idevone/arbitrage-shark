@@ -22,6 +22,10 @@ services:
       dockerfile: Dockerfile
     container_name: liquibase
     restart: no
+    environment:
+      DB_URL: "jdbc:postgresql://vultr-prod-47ece5d5-eb9c-4855-94c5-8804581daa12-vultr-prod-92d7.vultrdb.com:16751/audience-postgres"
+      POSTGRES_USER: "vultradmin"
+      POSTGRES_PASSWORD: "AVNS_nLThkCM8QhWbexMvWAk"
     networks:
       - web_network
 
@@ -31,8 +35,25 @@ services:
       dockerfile: Dockerfile
     container_name: crm
     restart: on-failure
+    environment:
+      DB_DSN: "pgsql:host=vultr-prod-47ece5d5-eb9c-4855-94c5-8804581daa12-vultr-prod-92d7.vultrdb.com;port=16751;dbname=audience-postgres"
+      DB_USER: "vultradmin"
+      DB_PASS: "AVNS_nLThkCM8QhWbexMvWAk"
     volumes:
       - ./crm:/var/www/html/arbitrage-shark/crm
+    networks:
+      - web_network
+
+  bot_service:
+    build:
+      context: ./bot_service
+      dockerfile: Dockerfile
+    container_name: bot_service
+    restart: on-failure
+    environment:
+      DB_DSN: "pgsql:host=vultr-prod-47ece5d5-eb9c-4855-94c5-8804581daa12-vultr-prod-92d7.vultrdb.com;port=16751;dbname=audience-postgres"
+      DB_USER: "vultradmin"
+      DB_PASS: "AVNS_nLThkCM8QhWbexMvWAk"
     networks:
       - web_network
 
