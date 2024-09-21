@@ -45,31 +45,32 @@ $this->title = 'Медиа статистика';
         ], ['prompt' => 'Select Grouping']) ?>
 
         <div class="row">
-            <div class="col-md-6">
-                <?= $form->field($model, 'channel_name')->dropDownList($channelList, ['prompt' => 'Select Channel']) ?>
+            <div class="col-md-3">
+                <?= $form->field($model, 'startDate')->input('date') ?>
+            </div>
+
+            <div class="col-md-3">
+                <?= $form->field($model, 'endDate')->input('date') ?>
             </div>
 
             <div class="col-md-6">
-                <?= $form->field($model, 'pixel_id')->dropDownList($pixelList, ['prompt' => 'Select Pixel']) ?>
+                <?= $form->field($model, 'ad_set')->dropDownList(['В разработке'], ['prompt' => 'Выбрать набор объявлений']) ?>
             </div>
         </div>
 
-
-        <?= $form->field($model, 'endDate')->input('date') ?>
-
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($model, 'channel_name')->dropDownList($channelList, ['prompt' => 'Select Channel']) ?>
+                <?= $form->field($model, 'channel_name')->dropDownList($channelList, ['prompt' => 'Выбрать канал']) ?>
             </div>
 
             <div class="col-md-6">
-                <?= $form->field($model, 'pixel_id')->dropDownList($pixelList, ['prompt' => 'Select Pixel']) ?>
+                <?= $form->field($model, 'pixel_id')->dropDownList($pixelList, ['prompt' => 'Выбрать пиксель']) ?>
             </div>
         </div>
 
         <div class="form-group">
-            <?= Html::submitButton('Filter', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Reset', ['index'], ['class' => 'btn btn-outline-secondary']) ?>
+            <?= Html::submitButton('Применить', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Сбросить', ['index'], ['class' => 'btn btn-outline-secondary']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
