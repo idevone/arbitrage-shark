@@ -6,16 +6,8 @@
 
 $this->title = 'Redirecting...';
 $client_referer = $_SERVER["HTTP_REFERER"];
+echo $client_referer;
 
-$data = Yii::$app->request->post();
-
-if (isset($data['referer'])) {
-    Yii::$app->db->createCommand()->insert('audience', [
-        'refer' => $data['referer']
-    ])->execute();
-}
-
-echo $data['referer'];
 
 ?>
 
