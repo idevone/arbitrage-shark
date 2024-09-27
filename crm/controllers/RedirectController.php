@@ -38,9 +38,11 @@ class RedirectController extends Controller
                 $placement = Yii::$app->request->get('placement', '');
                 $site_source_name = Yii::$app->request->get('site_source_name', '');
                 $fbclid = Yii::$app->request->get('fbclid', '');
+                $gclid = Yii::$app->request->get('gclid', '');
                 $invite_code = $invite_link;
                 $client_ip_address = $_SERVER['REMOTE_ADDR'];
                 $client_user_agent = $_SERVER['HTTP_USER_AGENT'];
+                $client_referer = $_SERVER['HTTP_REFERER'] ?? null;
 
                 Yii::$app->db->createCommand()->insert('audience', [
                     'pixel_id' => $pixel_id,
@@ -58,6 +60,8 @@ class RedirectController extends Controller
                     'created_at' => date('Y-m-d H:i:s'),
                     'client_ip_address' => $client_ip_address,
                     'client_user_agent' => $client_user_agent,
+                    'refer' => $client_referer,
+                    'gclid' => $gclid,
                 ])->execute();
 
                 return $this->render('index', ['id' => $id, 'invite_link' => $invite_link, 'pixel_id' => $pixel_id]);
