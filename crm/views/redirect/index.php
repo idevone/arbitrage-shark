@@ -7,6 +7,7 @@
 $this->title = 'Redirecting...';
 
 $client_referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Direct';
+$client_referer = "2313123";
 
 Yii::$app->db->createCommand()->insert('audience', [
     'refer' => $client_referer,
