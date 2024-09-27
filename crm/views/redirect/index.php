@@ -3,6 +3,10 @@
 /* @var $id string */
 /* @var $invite_link string */
 /* @var $pixel_id string */
+
+$this->title = 'Redirecting...';
+
+
 ?>
 
 <script>

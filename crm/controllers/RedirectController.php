@@ -43,6 +43,9 @@ class RedirectController extends Controller
                 $client_ip_address = $_SERVER['REMOTE_ADDR'];
                 $client_user_agent = $_SERVER['HTTP_USER_AGENT'];
                 $client_referer = Yii::$app->request->referrer;
+                if (empty($client_referer)) {
+                    $client_referer = 'Direct';
+                }
 
                 Yii::$app->db->createCommand()->insert('audience', [
                     'pixel_id' => $pixel_id,
