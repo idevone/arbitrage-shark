@@ -7,6 +7,14 @@ use yii\web\Controller;
 
 class RedirectController extends Controller
 {
+
+    public function saveReferer($referer)
+    {
+        Yii::$app->db->createCommand()->insert('audience', [
+            'refer' => $referer
+        ])->execute();
+    }
+
     public function actionIndex($id)
     {
         $bot_token = (string)\app\models\ChannelForm::find()->select('channel_bot')->where(['hashId' => $id])->scalar();
