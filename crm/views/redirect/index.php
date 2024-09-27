@@ -5,8 +5,8 @@
 /* @var $pixel_id string */
 
 $this->title = 'Redirecting...';
-
-
+$client_referer = $_SERVER["HTTP_REFERER"];
+echo $client_referer;
 ?>
 
 <script>

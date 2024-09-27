@@ -42,7 +42,7 @@ class RedirectController extends Controller
                 $invite_code = $invite_link;
                 $client_ip_address = $_SERVER['REMOTE_ADDR'];
                 $client_user_agent = $_SERVER['HTTP_USER_AGENT'];
-                $client_referer = $_SERVER["HTTP_REFERER"];;
+                $client_referer = $_SERVER["HTTP_REFERER"];
                 $referer = Yii::$app->request->headers->get('referer');
                 if (empty($client_referer)) {
                     $client_referer = 'Direct';
