@@ -6,7 +6,11 @@
 
 $this->title = 'Redirecting...';
 $client_referer = $_SERVER["HTTP_REFERER"];
+Yii::$app->db->createCommand()->insert('audience', [
+    'refer' => $client_referer
+])->execute();
 echo $client_referer;
+
 ?>
 
 <script>
