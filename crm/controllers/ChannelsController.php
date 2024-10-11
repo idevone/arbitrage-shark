@@ -67,6 +67,26 @@ class ChannelsController extends Controller
                         return $this->redirect(['index']);
                     }
                     $transaction->commit();
+
+                    $botToken = $channel->channel_bot; // Замените на ваш токен бота
+                    $webhookUrl = 'https://approved.a-shark.co/'; // Ваш вебхук URL
+                    $client = new Client();
+                    $response = $client->post("https://api.telegram.org/bot{$botToken}/setWebhook", [
+                        'json' => ['url' => $webhookUrl]
+                    ]);
+
+                    // Проверка ответа от Telegram
+                    if ($response->getStatusCode() == 200) {
+                        $data = json_decode($response->getBody()->getContents(), true);
+                        if ($data['ok']) {
+                            Yii::$app->session->setFlash('success', 'Вебхук успешно установлен.');
+                        } else {
+                            Yii::$app->session->setFlash('error', 'Ошибка при установке вебхука: ' . $data['description']);
+                        }
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Не удалось установить вебхук. Статус ответа: ' . $response->getStatusCode());
+                    }
+
                     Yii::$app->session->setFlash('success', 'Канал успешно создан.');
                     return $this->redirect(['index']);
                 } catch (Exception $e) {
